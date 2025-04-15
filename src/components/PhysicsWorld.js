@@ -1,6 +1,9 @@
-import { useBox, usePlane } from '@react-three/cannon'
+import { Physics, useBox, usePlane } from '@react-three/cannon'
 import { useTexture } from '@react-three/drei'
 import * as THREE from 'three'
+import { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+
 
 function BlueBox() {
   const [ref] = useBox(() => ({ mass: 1, position: [0, 10, 0] }))
@@ -37,9 +40,9 @@ function Plane() {
 
 export function PhysicsWorld() {
   return (
-    <PhysicsWorld gravity={[0, -5, 0]}>
+    <Physics gravity={[0, -5, 0]}>
       <BlueBox />
       <Plane />
-    </PhysicsWorld>
+    </Physics>
   )
 }
