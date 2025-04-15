@@ -7,15 +7,18 @@ import { Effects } from './components/Effects'
 import './styles.css' // File CSS baru
 import { useInView } from 'react-intersection-observer'
 import { useGLTF } from '@react-three/drei'
+import { motion } from 'framer-motion'
 
-function FeatureCard() {
-  const [ref, inView] = useInView({ triggerOnce: true })
-  return (
-    <div ref={ref} className={`feature-card ${inView ? 'animate-fade' : ''}`}>
-      {/* Konten */}
-    </div>
-  )
-}
+<motion.div 
+  className="feature-card"
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+  viewport={{ once: true }}
+>
+  <h2>⚡ Real-Time Physics</h2>
+  <p>Simulasi gravitasi berbasis GPU</p>
+</motion.div>
 
 function ModelViewer() {
   const { scene } = useGLTF('/model.glb')

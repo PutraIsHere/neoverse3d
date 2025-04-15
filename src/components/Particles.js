@@ -1,23 +1,22 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
-export function Particles() {
+export function ImpactParticles() {
   const particlesRef = useRef()
-  
-  // Inisialisasi partikel
-  const count = 5000
+  const count = 1000
   const positions = new Float32Array(count * 3)
   
+  // Inisialisasi posisi acak
   for (let i = 0; i < count * 3; i++) {
-    positions[i] = (Math.random() - 0.5) * 20
+    positions[i] = (Math.random() - 0.5) * 10
   }
-  
-  useFrame((state) => {
-    particlesRef.current.rotation.x += 0.0005
-    particlesRef.current.rotation.y += 0.001
+
+  useFrame(() => {
+    if (!particlesRef.current) return
+    particlesRef.current.rotation.y += 0.002
   })
-  
+
   return (
     <points ref={particlesRef}>
       <bufferGeometry attach="geometry">
@@ -35,6 +34,7 @@ export function Particles() {
         transparent
         opacity={0.8}
         blending={THREE.AdditiveBlending}
+        sizeAttenuation={true}
       />
     </points>
   )

@@ -1,13 +1,26 @@
-import { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
-import { Physics, useBox, usePlane } from '@react-three/cannon'
+import { useBox, usePlane } from '@react-three/cannon'
+import { useTexture } from '@react-three/drei'
+import * as THREE from 'three'
 
-function Box() {
-  const [ref, api] = useBox(() => ({ mass: 1, position: [0, 5, 0] }))
+function BlueBox() {
+  const [ref] = useBox(() => ({ mass: 1, position: [0, 10, 0] }))
+  const texture = useTexture({
+    map: 'https://i.imgur.com/MZQaH4o.png', // Texture biru holografik
+    alphaMap: 'https://i.imgur.com/7QFcSr2.png', // Glow edge
+  })
+
   return (
     <mesh ref={ref} castShadow>
       <boxGeometry args={[2, 2, 2]} />
-      <meshStandardMaterial color="orange" />
+      <meshStandardMaterial
+        {...texture}
+        color="#00a2ff"
+        emissive="#00a2ff"
+        emissiveIntensity={2}
+        transparent
+        opacity={0.9}
+        side={THREE.DoubleSide}
+      />
     </mesh>
   )
 }
@@ -24,8 +37,8 @@ function Plane() {
 
 export function PhysicsWorld() {
   return (
-    <Physics gravity={[0, -9.81, 0]}>
-      <Box />
+    <Physics gravity={[0, -5, 0]}>
+      <BlueBox />
       <Plane />
     </Physics>
   )
