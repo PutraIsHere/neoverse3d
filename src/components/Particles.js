@@ -42,3 +42,5 @@ export function Particles() {
   )
 }
 
+// 2. Atau default export (untuk impor: import Particles from ...)
+// export default function Particles() { ... }

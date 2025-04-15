@@ -8,6 +8,12 @@ import { useEffect } from 'react'
 
 function BlueBox() {
   const [ref, api] = useBox(() => ({ mass: 1, position: [0, 10, 0] }))
+  const texture = useTexture({
+    map: 'https://i.imgur.com/MZQaH4o.png', // URL texture
+    alphaMap: 'https://i.imgur.com/7QFcSr2.png' // URL alpha map
+  }, undefined, (error) => {
+    console.error("Failed to load texture:", error)
+  })
 
   useEffect(() => {
     const playSound = () => {
@@ -17,7 +23,7 @@ function BlueBox() {
     }
 
     api.position.subscribe((pos) => {
-      if (pos[1] < 1) playSound() // Mainkan suara saat menyentuh lantai
+      if (pos[1] < 1) playSound()
     })
   }, [api])
 

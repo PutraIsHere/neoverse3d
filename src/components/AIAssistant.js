@@ -1,47 +1,20 @@
-import { useState, useEffect } from 'react'
-import * as tf from '@tensorflow/tfjs'
-import * as speechCommands from '@tensorflow-models/speech-commands'
+import { useState, useEffect } from 'react';
+import * as tf from '@tensorflow/tfjs';
+import '@tensorflow/tfjs-backend-webgl';
 
 export function AIAssistant() {
-  const [listening, setListening] = useState(false)
-  const [command, setCommand] = useState('')
-
   useEffect(() => {
-    const initModel = async () => {
-      const recognizer = speechCommands.create('BROWSER_FFT')
-      await recognizer.ensureModelLoaded()
-      
-      recognizer.listen(result => {
-        const { scores } = result
-        const labels = recognizer.wordLabels()
-        const maxScore = Math.max(...scores)
-        const index = scores.indexOf(maxScore)
-        
-        setCommand(labels[index])
-        
-        // Eksekusi perintah
-        if (labels[index] === 'up') {
-          console.log('Melompat!')
-        }
-      }, {
-        includeSpectrogram: true,
-        probabilityThreshold: 0.7
-      })
-      
-      setListening(true)
-    }
-
-    initModel()
-    return () => tf.disposeVariables()
-  }, [])
-
-  return (
-    <div className="ai-assistant">
-      {listening ? (
-        <p>AI mendengar: <strong>{command || "..."}</strong></p>
-      ) : (
-        <p>Menyiapkan mikrofon...</p>
-      )}
-    </div>
-  )
+    const init = async () => {
+      try {
+        await tf.setBackend('webgl');
+        await tf.ready();
+        console.log("TFJS ready!");
+      } catch (err) {
+        console.error("Failed to load TFJS:", err);
+      }
+    };
+    init();
+  }, []);
+  
+  return <div>Simple AI Assistant</div>;
 }
