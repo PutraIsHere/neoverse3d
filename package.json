@@ -10,6 +10,7 @@
     "@tensorflow-models/speech-commands": "^0.5.4",
     "@tensorflow/tfjs": "^3.21.0",
     "@tensorflow/tfjs-backend-webgl": "^3.21.0",
+    "@tensorflow/tfjs-backend-webgl": "3.21.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -26,10 +27,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "start": "craco start",
+  "build": "craco build",
+  "test": "craco test"
   },
   "eslintConfig": {
     "extends": [
