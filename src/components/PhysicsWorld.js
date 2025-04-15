@@ -37,9 +37,9 @@ function Plane() {
 
 export function PhysicsWorld() {
   return (
-    <Physics gravity={[0, -5, 0]}>
+    <PhysicsWorld gravity={[0, -5, 0]}>
       <BlueBox />
       <Plane />
-    </Physics>
+    </PhysicsWorld>
   )
 }

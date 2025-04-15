@@ -1,13 +1,15 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
-export function ImpactParticles() {
+// Pilih salah satu (sesuai kebutuhan):
+
+// 1. Named export (untuk impor: import { Particles } from ...)
+export function Particles() {
   const particlesRef = useRef()
   const count = 1000
   const positions = new Float32Array(count * 3)
   
-  // Inisialisasi posisi acak
   for (let i = 0; i < count * 3; i++) {
     positions[i] = (Math.random() - 0.5) * 10
   }
@@ -39,3 +41,4 @@ export function ImpactParticles() {
     </points>
   )
 }
+
