@@ -3,14 +3,23 @@ import { useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
+import { useEffect } from 'react'
 
 
 function BlueBox() {
-  const [ref] = useBox(() => ({ mass: 1, position: [0, 10, 0] }))
-  const texture = useTexture({
-    map: 'https://i.imgur.com/MZQaH4o.png', // Texture biru holografik
-    alphaMap: 'https://i.imgur.com/7QFcSr2.png', // Glow edge
-  })
+  const [ref, api] = useBox(() => ({ mass: 1, position: [0, 10, 0] }))
+
+  useEffect(() => {
+    const playSound = () => {
+      const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3')
+      audio.volume = 0.3
+      audio.play()
+    }
+
+    api.position.subscribe((pos) => {
+      if (pos[1] < 1) playSound() // Mainkan suara saat menyentuh lantai
+    })
+  }, [api])
 
   return (
     <mesh ref={ref} castShadow>
@@ -27,6 +36,9 @@ function BlueBox() {
     </mesh>
   )
 }
+
+
+
 
 function Plane() {
   const [ref] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0] }))

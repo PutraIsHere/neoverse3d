@@ -1,13 +1,13 @@
 // src/App.js
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment } from '@react-three/drei'
-import { PhysicsWorld } from './components/PhysicsWorld'
 import { Particles } from './components/Particles'
 import { Effects } from './components/Effects'
 import './styles.css' // File CSS baru
 import { useInView } from 'react-intersection-observer'
 import { useGLTF } from '@react-three/drei'
 import { motion } from 'framer-motion'
+import { PhysicsWorld, DistortionEffect, AIAssistant } from './components'
 
 <motion.div 
   className="feature-card"
@@ -23,6 +23,21 @@ import { motion } from 'framer-motion'
 function ModelViewer() {
   const { scene } = useGLTF('/model.glb')
   return <primitive object={scene} scale={0.5} />
+}
+
+function App() {
+  return (
+    <div className="app">
+      <Canvas>
+        <PhysicsWorld />
+        <DistortionEffect />
+      </Canvas>
+      
+      <div className="ui-overlay">
+        <AIAssistant />
+      </div>
+    </div>
+  )
 }
 
 export default function App() {
