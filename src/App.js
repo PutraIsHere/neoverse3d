@@ -25,21 +25,6 @@ function ModelViewer() {
   return <primitive object={scene} scale={0.5} />
 }
 
-function App() {
-  return (
-    <div className="app">
-      <Canvas>
-        <PhysicsWorld />
-        <DistortionEffect />
-      </Canvas>
-      
-      <div className="ui-overlay">
-        <AIAssistant />
-      </div>
-    </div>
-  )
-}
-
 export default function App() {
   return (
     <div className="website-container">
@@ -50,6 +35,16 @@ export default function App() {
           <Particles />
           <Effects />
         </Canvas>
+        <div className="app">
+      <Canvas>
+        <PhysicsWorld />
+        <DistortionEffect />
+      </Canvas>
+      
+      <div className="ui-overlay">
+        <AIAssistant />
+      </div>
+    </div>
         <div className="hero-content">
           <h1>NEOVERSE</h1>
           <p>Next-Gen 3D Web Experience</p>
