@@ -1,12 +1,15 @@
 // craco.config.js
 module.exports = {
   webpack: {
-    configure: {
-      resolve: {
-        fallback: {
-          "util": require.resolve("util/")
-        }
-      }
+    configure: (webpackConfig) => {
+      webpackConfig.resolve.fallback = {
+        ...webpackConfig.resolve.fallback,
+        "util": require.resolve("util/"),
+        "buffer": require.resolve("buffer/"),
+        "events": require.resolve("events/"),
+        "stream": require.resolve("stream-browserify")
+      };
+      return webpackConfig;
     }
   }
-}
+};
